@@ -4,32 +4,34 @@
  */
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
 
 public class SocketClient {
     public static void main(String[] args) throws IOException {
 
         String hostName = "localhost";
-        Scanner scanner = new Scanner(System.in);
-        int portNumber = scanner.nextInt();
+        int portNumber = 4444;
+
         try (
-                Socket clientSocket = new Socket(hostName, portNumber);
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                Socket kkSocket = new Socket(hostName, portNumber);
+                PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream()));
+                        new InputStreamReader(kkSocket.getInputStream()));
         ) {
             BufferedReader stdIn =
                     new BufferedReader(new InputStreamReader(System.in));
-            String server_recieved;
+            String fromServer;
             String fromUser;
-            String _msg;
-            while ((server_recieved = in.readLine()) != null) {
 
-//                ClientProtocol clientProtocol = new ClientProtocol("My toy", "the description", "My company",
-//                        "my street", "my zip", "my country", 1234, 1000, 12345678, "7/7/1997");
-//                _msg = clientProtocol.clientProcessInput(server_recieved);
-                System.out.println("Server: " +server_recieved);
-                if (server_recieved.equals("Bye."))
+            /**
+             * String toyName, String descrription, String company, String street,
+             *                           String zipCode, String country, int toy_code, int price, int batchNumber, String date_of_manufacture
+             */
+            ClientProtocol clientProtocol = new ClientProtocol("My toy","the description","MY company",
+                                            "the street", "the code", "the country", 1234, 10000,12345678, "23/05/1997");
+            while ((fromServer = in.readLine()) != null) {
+                String server_received = clientProtocol.clientProcessInput(fromServer);
+                System.out.println("Server: " + server_received);
+                if (fromServer.equals("Successful communication"))
                     break;
 
                 fromUser = stdIn.readLine();

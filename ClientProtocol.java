@@ -29,7 +29,7 @@ public class ClientProtocol {
     }
 
     public String clientProcessInput(String theInput) {
-        String theOutput = theInput;
+        String theOutput = null;
         if (theInput.equalsIgnoreCase("All Toy information")){
             theOutput = getAllToYInformation();
         }else if (theInput.equalsIgnoreCase("Toy identification details")){
@@ -40,7 +40,12 @@ public class ClientProtocol {
         }else if (theInput.equalsIgnoreCase("Manufacturer information")){
             theOutput = "Manufacturer information\n Company: " +getCompany() + "\nStreet: " +getStreet() + "\nZip code: " +getZipCode() +"\nCountry: " +getCountry();
         } else if (theInput.contains("unique identification code")){
-            theOutput = "Thank you! The unique identification code is "+ generateUnigueCode();
+            theOutput = "Thank you! The unique identification code is "+ generateUniqueCode();
+        }else if (theInput.equalsIgnoreCase("no")){
+
+        }
+        else  {
+            theOutput = theInput;
         }
 
         return theOutput;
@@ -62,7 +67,7 @@ public class ClientProtocol {
      * generate a unique code for the toy
      * @return
      */
-    public int generateUnigueCode(){
+    public int generateUniqueCode(){
         int maximum = 1000;
         int minimum = 1 ;
         Random rn = new Random();

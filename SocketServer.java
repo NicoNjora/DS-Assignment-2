@@ -1,17 +1,11 @@
-/**
- * This class sets up a socket listening for client to connect - and
- * communicates with your client
- *
- */
-
 import java.net.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class SocketServer {
     public static void main(String[] args) throws IOException {
-        Scanner scanner = new Scanner(System.in);
-        int portNumber = scanner.nextInt();
+
+
+        int portNumber = 4444;
 
         try (
                 ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -32,13 +26,12 @@ public class SocketServer {
             while ((inputLine = in.readLine()) != null) {
                 outputLine = serverProtocol.processInput(inputLine);
                 out.println(outputLine);
-                if (outputLine.equals("Bye."))
-                    outputLine = "Bye.";
-                    out.println(outputLine);
+                if (outputLine.equals("Successful communication"))
                     break;
             }
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "+ portNumber +"or listening for a connection");
+            System.out.println("Exception caught when trying to listen on port "
+                    + portNumber + " or listening for a connection");
             System.out.println(e.getMessage());
         }
     }
