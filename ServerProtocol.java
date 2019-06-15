@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class ServerProtocol {
@@ -10,64 +13,55 @@ public class ServerProtocol {
     private static final int FINISHED = 5;
     private int state = WAITING;
 
-    private String reply =  "Send Toy information";
-    private int count = 0 ;//Keep track of the number of times a server can request for information
+    //choices of information that the server can request for
+    ArrayList<String> server_choices = new ArrayList<String>(
+            Arrays.asList("All Toy information", "Toy identification details", "Toy information details", "Manufacturer information"));
+
     public String processInput(String theInput) {
         String theOutput = null;
 
         if (state == WAITING) {
-            theOutput = "Knock! Knock!";
+            theOutput = "Knock! Knock! Send me Toy information";
             state = SENTKNOCKKNOCK;
         } else if (state == SENTKNOCKKNOCK) {
-            if (theInput.equalsIgnoreCase("How can I help?")) {
-                theOutput =reply;
-                state = SENTREPLY;
-            } else {
-                theOutput = "You're supposed to say \"How can I help?\"! " +
-                        "Try again. Knock! Knock!";
-            }
-        } else if (state == SENTREPLY) {
             if (theInput.equalsIgnoreCase("which information?")) {
-                String[] choices ={"All Toy information", "Toy identification details", "Toy information details", "Manufacturer information"};
-                Random r=new Random();
-                int randomNumber=r.nextInt(choices.length);
-                theOutput = choices[randomNumber];
-                state = ANOTHER;
+                Random r = new Random();
+                int randomNumber = 0;
+                //check if the server has requested for all information
+                if (server_choices.isEmpty()) {
+                    theOutput = "Send Toy unique identification code";
+                    state = ALLRESPONSES;
+                } else {
+                    randomNumber = r.nextInt(server_choices.size());
+                    theOutput = server_choices.get(randomNumber);
+                    state = SENTREPLY;
+                    server_choices.remove(randomNumber);
+                }
             } else {
                 theOutput = "You're supposed to say \"which information?\"" +
                         "! Try again. Knock! Knock!";
-                state = SENTKNOCKKNOCK;
             }
-        } else if (state == ANOTHER) {
-            if (theInput.equalsIgnoreCase("want more information?")) {
-                String[] choice ={"no", "yes"};
-                Random r=new Random();
-                int randomNumber=r.nextInt(choice.length);
-
-                if (choice[randomNumber].equalsIgnoreCase("yes")){
-                    //if (count <= 3){
-                        theOutput = choice[randomNumber] + " send toy information";
-                        ++count;
-                        state = SENTREPLY;
-//                    }else{
-//                        theOutput = "You have exceeded the number of requests allowed;";
-//                        state = ALLRESPONSES;
-//                    }
-
-                }else if (choice[randomNumber].equalsIgnoreCase("no")){
-                    theOutput = choice[randomNumber];
+        } else if (state == SENTREPLY) {
+            if (theInput.equalsIgnoreCase("more information?")) {
+                Random random = new Random();
+                boolean isMoreInfo = random.nextBoolean();
+                if (isMoreInfo) {
+                    state = SENTKNOCKKNOCK;
+                    theOutput = String.valueOf(isMoreInfo);
+                } else {
+                    theOutput = String.valueOf(isMoreInfo);
                     state = ALLRESPONSES;
-                }else{
-                    theOutput = "No option selected";
                 }
+            } else {
+                theOutput = "You're supposed to say \"more information?\"";
             }
-        }else  if (state == ALLRESPONSES){
-            if (theInput.equalsIgnoreCase("want more?")){
+        } else if (state == ALLRESPONSES) {
+            if (theInput.equalsIgnoreCase("want more?")) {
                 theOutput = " Send Toy unique identification code";
                 state = FINISHED;
             }
-        }else if (state == FINISHED){
-            if (theInput.equalsIgnoreCase("Done?")){
+        }else if (state == FINISHED || state == ALLRESPONSES){
+            if (theInput.equalsIgnoreCase("Done?")) {
                 theOutput = "Successful communication";
                 state = WAITING;
             }

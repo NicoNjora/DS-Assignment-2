@@ -2,10 +2,12 @@
  * This class connects to the server and communicates with it according to
  * the Client Protocol
  */
+import javax.swing.*;
 import java.io.*;
 import java.net.*;
 
-public class SocketClient {
+public class SocketClient extends JFrame {
+
     public static void main(String[] args) throws IOException {
 
         String hostName = "localhost";
@@ -22,12 +24,9 @@ public class SocketClient {
             String fromServer;
             String fromUser;
 
-            /**
-             * String toyName, String descrription, String company, String street,
-             *                           String zipCode, String country, int toy_code, int price, int batchNumber, String date_of_manufacture
-             */
+
             ClientProtocol clientProtocol = new ClientProtocol("My toy","the description","MY company",
-                                            "the street", "the code", "the country", 1234, 10000,12345678, "23/05/1997");
+                    "the street", "the code", "the country", 1234, 10000,12345678, "23/05/1997");
             while ((fromServer = in.readLine()) != null) {
                 String server_received = clientProtocol.clientProcessInput(fromServer);
                 System.out.println("Server: " + server_received);
@@ -49,4 +48,6 @@ public class SocketClient {
             System.exit(1);
         }
     }
+
 }
+

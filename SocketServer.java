@@ -29,6 +29,11 @@ public class SocketServer {
                 if (outputLine.equals("Successful communication"))
                     break;
             }
+//            out.close();
+//            in.close();
+//            clientSocket.close();
+//            serverSocket.close();
+
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");

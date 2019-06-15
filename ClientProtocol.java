@@ -39,12 +39,16 @@ public class ClientProtocol {
                     "\nPrice: " + getPrice() + "\nDate of manufacture:"+ getDate_of_manufacture() +"\nBatch number:" +getBatchNumber();
         }else if (theInput.equalsIgnoreCase("Manufacturer information")){
             theOutput = "Manufacturer information\n Company: " +getCompany() + "\nStreet: " +getStreet() + "\nZip code: " +getZipCode() +"\nCountry: " +getCountry();
-        } else if (theInput.contains("unique identification code")){
-            theOutput = "Thank you! The unique identification code is "+ generateUniqueCode();
-        }else if (theInput.equalsIgnoreCase("no")){
-
+        } else if (theInput.equalsIgnoreCase("false")){
+            theOutput = "No";
         }
-        else  {
+        else if (theInput.equalsIgnoreCase("true")) {
+            theOutput = "Yes";
+        }else if (theInput.contains("unique identification code")){
+            theOutput = "Thank you! The unique identification code is "+ generateUniqueCode();
+        }
+        else{
+
             theOutput = theInput;
         }
 
