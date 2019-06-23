@@ -24,10 +24,12 @@ public class SocketServer {
             out.println(outputLine);
 
             while ((inputLine = in.readLine()) != null) {
-                outputLine = serverProtocol.processInput(inputLine);
-                out.println(outputLine);
-                if (outputLine.equals("Successful communication"))
-                    break;
+                if (inputLine.length() > 0){
+                    outputLine = serverProtocol.processInput(inputLine);
+                    out.println(outputLine);
+                    if (outputLine.equals("Successful communication"))
+                        break;
+                }
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
