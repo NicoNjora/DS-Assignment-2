@@ -26,12 +26,8 @@ public class SocketClient extends JFrame{
         int portNumber = 4444;
 
         Socket kkSocket = null;
-        //PrintWriter out = null;  Shifted this to the instance variable
         BufferedReader in = null;
-
-        BufferedReader stdIn =
-                    new BufferedReader(new InputStreamReader(System.in));
-            
+        BufferedReader stdIn =  new BufferedReader(new InputStreamReader(System.in));
 
         try {
                 kkSocket = new Socket(hostName, portNumber);
@@ -39,26 +35,6 @@ public class SocketClient extends JFrame{
                 in = new BufferedReader(
                         new InputStreamReader(kkSocket.getInputStream()));
         
-            
-
-            // /**
-            //  * String toyName, String descrription, String company, String street,
-            //  *                           String zipCode, String country, int toy_code, int price, int batchNumber, String date_of_manufacture
-            //  */
-            // ClientProtocol clientProtocol = new ClientProtocol("My toy","the description","MY company",
-            //                                 "the street", "the code", "the country", 1234, 10000,12345678, "23/05/1997");
-            // while ((fromServer = in.readLine()) != null) {
-            //     String server_received = clientProtocol.clientProcessInput(fromServer);
-            //     System.out.println("Server: " + server_received);
-            //     if (fromServer.equals("Successful communication"))
-            //         break;
-
-            //     fromUser = stdIn.readLine();
-            //     if (fromUser != null) {
-            //         System.out.println("Client: " + fromUser);
-            //         out.println(fromUser);
-            //     }
-            // }
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + hostName);
             System.exit(1);
