@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class SocketServer {
     public static void main(String[] args) throws IOException {
+        //setting the port for communication
         Scanner scanner = new Scanner(System.in);
-
         int portNumber = scanner.nextInt();
 
         try (

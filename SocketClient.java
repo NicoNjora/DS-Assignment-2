@@ -23,6 +23,7 @@ public class SocketClient extends JFrame{
 
     public void Client() throws IOException {
 
+        //user set port for communication
         Scanner scanner = new Scanner(System.in);
         String hostName = "localhost";
         int portNumber = scanner.nextInt();
