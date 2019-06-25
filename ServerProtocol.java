@@ -62,7 +62,7 @@ public class ServerProtocol {
             }
         }else if (state == FINISHED || state == ALLRESPONSES){
             if (theInput.equalsIgnoreCase("Done?")) {
-                theOutput = "Successful communication";
+                theOutput = "Communication Successful Bye! ";
                 state = WAITING;
             }
         }

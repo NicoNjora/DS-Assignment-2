@@ -1,11 +1,12 @@
 import java.net.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class SocketServer {
     public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
 
-
-        int portNumber = 4444;
+        int portNumber = scanner.nextInt();
 
         try (
                 ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -24,10 +25,12 @@ public class SocketServer {
             out.println(outputLine);
 
             while ((inputLine = in.readLine()) != null) {
-                outputLine = serverProtocol.processInput(inputLine);
-                out.println(outputLine);
-                if (outputLine.equals("Successful communication"))
-                    break;
+                if (inputLine.length() > 0){
+                    outputLine = serverProtocol.processInput(inputLine);
+                    out.println(outputLine);
+                    if (outputLine.equals("Successful communication"))
+                        break;
+                }
             }
 //            out.close();
 //            in.close();
