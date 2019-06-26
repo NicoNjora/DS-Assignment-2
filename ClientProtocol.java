@@ -33,12 +33,12 @@ public class ClientProtocol {
         if (theInput.equalsIgnoreCase("All Toy information")){
             theOutput = getAllToYInformation();
         }else if (theInput.equalsIgnoreCase("Toy identification details")){
-            theOutput = " Toy identification details\n Toy code: " + getToy_code() + "\nName: " +getToyName();
+            theOutput = " \n Toy identification details:\nToy code: " + getToy_code() + "\nName: " +getToyName();
         }else if (theInput.equalsIgnoreCase("Toy information details")){
-            theOutput = "Toy information\n Name: " +getToyName()+ "\nDescription : " +getDescrription() +
+            theOutput = "\nToy information\n Name: " +getToyName()+ "\nDescription : " +getDescrription() +
                     "\nPrice: " + getPrice() + "\nDate of manufacture:"+ getDate_of_manufacture() +"\nBatch number:" +getBatchNumber();
         }else if (theInput.equalsIgnoreCase("Manufacturer information")){
-            theOutput = "Manufacturer information\n Company: " +getCompany() + "\nStreet: " +getStreet() + "\nZip code: " +getZipCode() +"\nCountry: " +getCountry();
+            theOutput = "\nManufacturer information\n Company: " +getCompany() + "\nStreet: " +getStreet() + "\nZip code: " +getZipCode() +"\nCountry: " +getCountry();
         } else if (theInput.equalsIgnoreCase("false")){
             theOutput = "No";
         }
@@ -61,7 +61,7 @@ public class ClientProtocol {
      * @return
      */
     public String getAllToYInformation(){
-        return  "Details:  Toy code: " + getToy_code() + "\nName: " +getToyName()+ "\nDescription : " +getDescrription() +
+        return  "\nAll toy information:\n  Toy code: " + getToy_code() + "\nName: " +getToyName()+ "\nDescription : " +getDescrription() +
                 "\nPrice: " + getPrice() + "\nDate of manufacture: "+ getDate_of_manufacture() +"\nBatch number: " +getBatchNumber() +
                 "\nCompany: " +getCompany() + "\nStreet: " +getStreet() + "\nZip code: " +getZipCode() +"\nCountry: " +getCountry();
 
@@ -81,6 +81,46 @@ public class ClientProtocol {
     }
     public String getToyName() {
         return toyName;
+    }
+
+    public void setToyName(String toyName) {
+        this.toyName = toyName;
+    }
+
+    public void setDescrription(String descrription) {
+        this.descrription = descrription;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setDate_of_manufacture(String date_of_manufacture) {
+        this.date_of_manufacture = date_of_manufacture;
+    }
+
+    public void setToy_code(int toy_code) {
+        this.toy_code = toy_code;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setBatchNumber(int batchNumber) {
+        this.batchNumber = batchNumber;
     }
 
     public String getDescrription() {
